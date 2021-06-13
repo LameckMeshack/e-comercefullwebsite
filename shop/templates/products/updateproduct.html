@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% include '_messages.html' %}
+<div class="container">
+   <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h2 class="text-center bg-info p-2">Add a product</h2>
+            {% from "_formhelpers.html" import render_field %}
+            <form action="" method="POST" enctype="multipart/form-data">
+                {{ render_field(form.name, class="form-control", placeholder="Add product name")}}
+                {{ render_field(form.price, class="form-control", placeholder="Add product price")}}        
+                {{ render_field(form.discount, class="form-control", placeholder="Add product discount")}}
+                {{ render_field(form.stock, class="form-control", placeholder="Add product stock")}}       
+                
+                <label for="brand">Add a brand</label>
+                <select name="brand" id="brand" class="form-control" required>
+                    <option value="{{product.brand_id}}">{{product.brand.name}}</option>
+                    {% for brand in brands %}
+                <option value={{brand.id}}>{{brand.name}}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="category">Add a category</label>
+                <select name="category" id="category" class="form-control" required>
+                    <option value="{{product.category_id}}">{{product.category.name}}</option>
+                    {% for category in categories %}
+                    <option value={{category.id}}>{{category.name}}</option>
+                    {% endfor %}
+                </select>
+                
+                {{ render_field(form.color, class="form-control", placeholder="Add product colors")}}
+                {{ render_field(form.description, class="form-control", placeholder="Add product detail", 
+                rows="10")}}
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4"><input type="file" name="image_1" class="form-control"></div>
+                        <div class="col-md-4"><input type="file" name="image_2" class="form-control"></div>
+                        <div class="col-md-4"><input type="file" name="image_3" class="form-control"> </div>
+                    </div>
+                </div>
+            <button type="submit" class="btn btn-outline-info mt-4">Update Product</button>    
+            </form>
+        </div>
+    </div>    <div class="col-md-2"></div>
+</div>
+{% endblock content %}
